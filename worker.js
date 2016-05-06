@@ -15,7 +15,7 @@ var buttonclick$ = domevent$.filter(function (cmd) {
 
 var clicksub = buttonclick$.subscribe(
   function (clicktotal) {
-    patchDOM('patch ' + clicktotal)
+    patchDOM({'selector': 'span#count', 'value': clicktotal})
   },
   function (err) { console.log('Error: %s', err) },
   function () { console.log('Completed') }

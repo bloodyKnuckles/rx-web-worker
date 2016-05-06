@@ -1,5 +1,5 @@
-var patchDOM = require('virtual-dom/patch')
-var fromJSON = require('vdom-as-json/fromJson')
+//var patchDOM = require('virtual-dom/patch')
+//var fromJSON = require('vdom-as-json/fromJson')
 
 console.log('main init')
 var rootnode = document.documentElement
@@ -10,16 +10,16 @@ worker.addEventListener('message', function (evt) {
   evt.data.forEach(function (cmd) {
     switch ( cmd.cmd ) {
       case 'event': workerHandler(cmd.event); break
-      case 'patch': patchHandler(fromJSON(cmd.patch)); break;
+      //case 'patch': patchHandler(fromJSON(cmd.patch)); break;
+      case 'patch': patchHandler(cmd.patch); break;
     }
   })
 }, false)
 //worker.postMessage({cmd: 'init', absurl: location.origin + location.pathname})
 
 function patchHandler (patch) {
-console.log(patch)
   window.requestAnimationFrame(function () {
-    //patchDOM(rootnode, patch)
+    patchDOM(rootnode, patch)
   })
 }
 
@@ -38,3 +38,8 @@ function workerHandler (evtinfo) {
   }, false)
 }
 
+function patchDOM (rootnode, patch) {
+  var elem = rootnode.querySelector(patch.selector)
+  while( elem.firstChild ) { elem.removeChild( elem.firstChild ) }
+  elem.appendChild(document.createTextNode(patch.value))
+}

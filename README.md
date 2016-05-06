@@ -2,6 +2,8 @@
 
 Under development.
 
+[Demo](http://bloodyknuckles.neocities.org/rx-web-worker/)
+
 ### run
 
 ```
@@ -10,8 +12,6 @@ npm i rx-lite
 browserify worker.js > workerB.js
 wzrd index.js:index.js
 ```
-Open console to see response.
-
 ### license
 
 MIT
