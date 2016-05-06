@@ -10,6 +10,7 @@ npm i rx-lite
 browserify worker.js > workerB.js
 wzrd index.js:index.js
 ```
+Open console to see response.
 
 ### license
 
