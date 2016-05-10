@@ -17,6 +17,13 @@ worker.addEventListener('message', function (evt) {
 }, false)
 //worker.postMessage({cmd: 'init', absurl: location.origin + location.pathname})
 
+document.body.addEventListener('click', function (evt) {
+  if ( 'A' === evt.target.tagName && evt.target.host === window.location.host ) { // local
+    evt.preventDefault()
+    worker.postMessage({cmd: 'url', url: evt.target.getAttribute('href')})
+  }
+})
+
 function patchHandler (patch) {
   window.requestAnimationFrame(function () {
     patchDOM(rootnode, patch)
