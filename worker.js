@@ -28,12 +28,15 @@ var url$ = domevent$.filter(function (cmd) {
   .map(function (cmd) { return cmd.url })
 
 var urlsub = url$.subscribe(function (url) {
-  console.log(url)
-})
+    console.log(url)
+  },
+  errHandler,
+  compHandler
+)
 
 
 var allevent$ = domevent$.map(function (cmd) {
-  return cmd.event.element
+  return cmd
 })
 
 var eventsub = allevent$.subscribe(function (elem) {
